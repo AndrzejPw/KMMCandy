@@ -1,16 +1,14 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+This is a Kotlin Multiplatform project targeting Android, iOS. It can be starting point to create a project that tries to share all business logic between Android and iOS while keeping UI native. I decided to go with native UI because Compose Multiplatform does not support navigation natively yet. 
 
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+  - `commonMain` contains pure composables (views) - that means the only allowed arguments for these composables are state and callbacks.
+  - `androidMain` contains Android application and composables related to navigation. This module is responsible for navigation, creating viewModels and using composables from commonMain
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+* `/iosApp` contains iOS applications. IOS app uses the ViewModels from Shared module. 
 
-* `/shared` is for the code that will be shared between all targets in the project.
+
+* `/shared` is for the code that will be shared between all targets in the project. It contains ViewModels too thanks to [KMM-ViewModel library](https://github.com/rickclephas/KMM-ViewModel)
   The most important subfolder is `commonMain`. If preferred, you can add code to the platform-specific folders here too.
 
 
