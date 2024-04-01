@@ -12,7 +12,7 @@ fun AppNotActivatedScreen(
     Column {
         Text("App is not activated")
         Button(onClick = onActivateClick) {
-            Text("Activate mes")
+            Text("Activate me")
         }
     }
 

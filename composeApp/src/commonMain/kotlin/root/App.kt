@@ -1,13 +1,10 @@
-package org.ab
+package root
 
 import android.app.Application
+import di.appModule
 import di.initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
-import vm.login.LoginViewModel
-import vm.root.RootViewModel
 
 class App : Application() {
     override fun onCreate() {
@@ -21,7 +18,3 @@ class App : Application() {
     }
 }
 
-val appModule = module {
-    viewModel { RootViewModel() }
-    viewModel { LoginViewModel() }
-}

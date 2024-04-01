@@ -25,10 +25,6 @@ class RootViewModel : KMMViewModel(), KoinComponent {
         }
     }
 
-    fun activateApp() {
-        appActivationState.setAppActivated()
-    }
-
     @NativeCoroutinesState
     val state =
         combine(
@@ -38,8 +34,10 @@ class RootViewModel : KMMViewModel(), KoinComponent {
             if (isActivated) {
                 if (isLoggedIn == null) {
                     RootState.Loading
+                } else if (isLoggedIn) {
+                    RootState.ApplicationLoggedIn
                 } else {
-                    RootState.ApplicationActivated(loggedIn = isLoggedIn)
+                    RootState.ApplicationNotLoggedIn
                 }
             } else {
                 RootState.ApplicationNotActivated
@@ -51,5 +49,6 @@ class RootViewModel : KMMViewModel(), KoinComponent {
 sealed class RootState {
     object Loading : RootState()
     object ApplicationNotActivated : RootState()
-    data class ApplicationActivated(val loggedIn: Boolean) : RootState()
+    object ApplicationLoggedIn : RootState()
+    object ApplicationNotLoggedIn : RootState()
 }
